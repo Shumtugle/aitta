@@ -1,0 +1,30 @@
+{
+ "name": "voice-ru-1",
+ "id": "voice-ru",
+ "version": 1,
+ "kind": "voice",
+ "about": "Speech model for Russian (text to speech), ONNX.",
+ "license": "CC-BY-4.0",
+ "file": "voice-ru-1.zip",
+ "origin": {
+  "url": "https://github.com/Shumtugle/hora/releases/download/packs/hora-voice-ru-1.zip",
+  "bytes": 102630314,
+  "sha256": "c984d5d9393cbf859c5da26a0409bb7dd2137c20f393d632500386fb28c4124d"
+ },
+ "take": [
+  "lm_main.onnx",
+  "lm_flow.onnx",
+  "text_conditioner.onnx",
+  "encoder.onnx",
+  "decoder.onnx",
+  "vocab.json",
+  "token_scores.json"
+ ],
+ "add": [
+  "NOTICE.txt"
+ ],
+ "expect": {
+  "bytes": 164282020,
+  "sha256": "102bc32fdf5f83d135cca947587bfd97c3d7c2b9b50435eff3ebfe63d54906d0"
+ }
+}

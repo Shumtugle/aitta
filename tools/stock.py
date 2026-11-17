@@ -105,9 +105,23 @@ def published(o):
     fail("the host does not list " + h["path"])
 
 
+def own_files(r):
+    """Origin files of our own that live in no public place: each taken from --from and checked."""
+    if not LOCAL:
+        fail("%s is made from files of our own; say where they are with --from DIR" % r["name"])
+    for n, f in r["origin"]["files"].items():
+        p = os.path.join(LOCAL, n)
+        if not os.path.exists(p) or os.path.getsize(p) != f["bytes"] or sha256(p) != f["sha256"]:
+            fail("%s in %s is missing or not the file the recipe names" % (n, LOCAL))
+        say("using", p)
+    return LOCAL
+
+
 def origin(r):
     """The origin file in ./work: taken from --from, else fetched; refused if its sum is wrong."""
     o = r["origin"]
+    if "files" in o:
+        return own_files(r)
     size, want = o.get("bytes"), o.get("sha256")
     if not want:
         size, want = published(o)
@@ -145,10 +159,20 @@ def pack(r, src):
     if r.get("pack") == "none":
         return src
     files = []
-    with tarfile.open(src, "r:*") as t:
+    root = r["origin"].get("root", "")
+    inner = lambda n: root + "/" + n if root else n
+    if os.path.isdir(src):
         for n in r["take"]:
-            m = t.getmember(r["origin"]["root"] + "/" + n)
-            files.append(entry(n, t.extractfile(m).read()))
+            with open(os.path.join(src, n), "rb") as f:
+                files.append(entry(n, f.read()))
+    elif zipfile.is_zipfile(src):
+        with zipfile.ZipFile(src) as z:
+            for n in r["take"]:
+                files.append(entry(n, z.read(inner(n))))
+    else:
+        with tarfile.open(src, "r:*") as t:
+            for n in r["take"]:
+                files.append(entry(n, t.extractfile(t.getmember(inner(n))).read()))
     for n in r.get("add", []):
         with open(os.path.join(RECIPES, r["name"], n), "rb") as f:
             files.append(entry(n, f.read()))

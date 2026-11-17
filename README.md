@@ -17,6 +17,8 @@ came (a model file) also names its origin as a second source.
 | tag | what | licence |
 |---|---|---|
 | `hear-ru-1` | small streaming speech recognizer for Russian | Apache-2.0 |
+| `voice-ru-1` | speech model for Russian (text to speech) | CC-BY-4.0 |
+| `stress-ru-1` | large Russian stress list | CC-BY-SA-4.0, Apache-2.0, MIT |
 | `llm-e2b-1` | Gemma 4 E2B instruct, Q4_K_M (two parts) | Apache-2.0 |
 | `llm-e2b-vision-1` | image projector for Gemma 4 E2B, F16 | Apache-2.0 |
 | `llm-e2b-draft-1` | draft model for Gemma 4 E2B, optional | Apache-2.0 |

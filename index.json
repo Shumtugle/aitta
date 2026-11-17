@@ -152,6 +152,38 @@
    "tier": "light",
    "group": "qwen-light",
    "role": "model"
+  },
+  {
+   "id": "stress-ru",
+   "version": 1,
+   "kind": "lexicon",
+   "tag": "stress-ru-1",
+   "file": "stress-ru-1.zip",
+   "bytes": 12214970,
+   "sha256": "c7882ac77e14e0e1c85c73e1b847e0ef174c5f5505b9fc055c6e90c01e7cdc70",
+   "license": "CC-BY-SA-4.0, Apache-2.0, MIT",
+   "unpack": "zip",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/stress-ru-1/stress-ru-1.zip"
+    }
+   ]
+  },
+  {
+   "id": "voice-ru",
+   "version": 1,
+   "kind": "voice",
+   "tag": "voice-ru-1",
+   "file": "voice-ru-1.zip",
+   "bytes": 164282020,
+   "sha256": "102bc32fdf5f83d135cca947587bfd97c3d7c2b9b50435eff3ebfe63d54906d0",
+   "license": "CC-BY-4.0",
+   "unpack": "zip",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/voice-ru-1/voice-ru-1.zip"
+    }
+   ]
   }
  ]
 }

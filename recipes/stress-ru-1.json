@@ -1,0 +1,27 @@
+{
+ "name": "stress-ru-1",
+ "id": "stress-ru",
+ "version": 1,
+ "kind": "lexicon",
+ "about": "Large Russian stress list.",
+ "license": "CC-BY-SA-4.0, Apache-2.0, MIT",
+ "file": "stress-ru-1.zip",
+ "origin": {
+  "files": {
+   "stress-big.tsv.gz": {
+    "bytes": 12200010,
+    "sha256": "4c607c419d5eb92decbcebe2abba0225772703b6e54843728015621bf56b615e"
+   }
+  }
+ },
+ "take": [
+  "stress-big.tsv.gz"
+ ],
+ "add": [
+  "NOTICE.txt"
+ ],
+ "expect": {
+  "bytes": 12214970,
+  "sha256": "c7882ac77e14e0e1c85c73e1b847e0ef174c5f5505b9fc055c6e90c01e7cdc70"
+ }
+}
