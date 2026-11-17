@@ -16,6 +16,8 @@
    "repo": "unsloth/Qwen3-1.7B-GGUF",
    "rev": "main",
    "path": "Qwen3-1.7B-UD-Q4_K_XL.gguf"
-  }
+  },
+  "bytes": 1132952128,
+  "sha256": "01977643b1d7292d09eb6ef75c7af8b084a3bbf2cb4e1d128ab76adeb8d75490"
  }
 }

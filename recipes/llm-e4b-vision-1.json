@@ -1,0 +1,22 @@
+{
+ "name": "llm-e4b-vision-1",
+ "id": "llm-e4b-vision",
+ "version": 1,
+ "kind": "llm",
+ "tier": "heavy",
+ "group": "gemma-e4b",
+ "role": "vision",
+ "about": "Image projector published with that model, F16 GGUF.",
+ "license": "see origin",
+ "pack": "none",
+ "copy": "private",
+ "file": "mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+ "origin": {
+  "url": "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+  "host": {
+   "repo": "HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive",
+   "rev": "main",
+   "path": "mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+  }
+ }
+}

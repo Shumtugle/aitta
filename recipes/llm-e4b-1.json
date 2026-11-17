@@ -1,0 +1,22 @@
+{
+ "name": "llm-e4b-1",
+ "id": "llm-e4b",
+ "version": 1,
+ "kind": "llm",
+ "tier": "heavy",
+ "group": "gemma-e4b",
+ "role": "model",
+ "about": "Gemma 4 E4B with refusals removed by its author, Q5_K_P GGUF.",
+ "license": "see origin",
+ "pack": "none",
+ "copy": "private",
+ "file": "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf",
+ "origin": {
+  "url": "https://huggingface.co/HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive/resolve/main/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf",
+  "host": {
+   "repo": "HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive",
+   "rev": "main",
+   "path": "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf"
+  }
+ }
+}

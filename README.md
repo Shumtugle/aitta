@@ -21,6 +21,8 @@ came (a model file) also names its origin as a second source.
 | `llm-e2b-vision-1` | image projector for Gemma 4 E2B, F16 | Apache-2.0 |
 | `llm-e2b-draft-1` | draft model for Gemma 4 E2B, optional | Apache-2.0 |
 | `llm-qwen-1` | Qwen3 1.7B, UD-Q4_K_XL | Apache-2.0 |
+| `llm-e4b-1` | Gemma 4 E4B with refusals removed, Q5_K_P: linked, not copied | see origin |
+| `llm-e4b-vision-1` | image projector for it, F16: linked, not copied | see origin |
 
 Origins, authors and changes are in `recipes/` and, for packed pieces, in
 each piece's `NOTICE.txt`. Model files are kept exactly as their authors

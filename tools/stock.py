@@ -18,7 +18,8 @@ in order, the parts are the very file the sum names.
     python3 tools/stock.py check NAME         download what is published, check every sum
     python3 tools/stock.py index              write index.json from the recipes
 
-build and upload take --from DIR: an origin file already on this machine, under
+upload takes --to OWNER/REPO to publish somewhere other than this storehouse
+(a private copy of a piece the index only links to). build and upload take --from DIR: an origin file already on this machine, under
 its own name in DIR, is used instead of downloading it, once its sum agrees.
 
 Needs Python 3 only; upload also needs the gh tool, logged in. Work files go
@@ -33,6 +34,7 @@ INDEX = os.path.join(ROOT, "index.json")
 PART = int(os.environ.get("STOCK_PART_MB", "1900")) * 1024 * 1024
 STAMP = (1980, 1, 1, 0, 0, 0)
 LOCAL = None
+TO = None
 
 
 def say(*words):
@@ -209,8 +211,10 @@ def gh(*args, quiet=False):
 
 
 def upload(name):
+    if recipe(name).get("copy") == "private" and not TO:
+        fail(name + " is only linked from here; its own copy goes elsewhere: add --to OWNER/REPO")
     r, piece, files = build(name)
-    where = repo()
+    where = TO or repo()
     if gh("release", "view", name, "--repo", where, quiet=True).returncode != 0:
         notes = "%s, version %d. %s Licence: %s. Size and sum: index.json." % (
             r["id"], r["version"], r.get("about", ""), r["license"])
@@ -268,7 +272,9 @@ def index():
             say("skipped (no expected sum yet):", n)
             continue
         base = "https://github.com/%s/releases/download/%s/%s" % (where, n, r["file"])
-        if want["bytes"] < PART:
+        if r.get("copy") == "private":
+            here = {"url": r["origin"]["url"]}
+        elif want["bytes"] < PART:
             here = {"url": base}
         else:
             here = {"parts": [{"url": "%s.part%d" % (base, i + 1), "sha256": s}
@@ -280,7 +286,7 @@ def index():
         for k in ("tier", "needs", "group", "role"):
             if k in r:
                 e[k] = r[k]
-        if r.get("pack") == "none" and r["origin"].get("url"):
+        if r.get("pack") == "none" and r["origin"].get("url") and r.get("copy") != "private":
             e["sources"].append({"url": r["origin"]["url"]})
         mods.append(e)
     with open(INDEX, "w", encoding="utf-8") as f:
@@ -290,7 +296,13 @@ def index():
 
 
 def main():
-    global LOCAL
+    global LOCAL, TO
+    if "--to" in sys.argv:
+        i = sys.argv.index("--to")
+        if i + 1 >= len(sys.argv) or "/" not in sys.argv[i + 1]:
+            fail("--to needs OWNER/REPO")
+        TO = sys.argv[i + 1]
+        del sys.argv[i:i + 2]
     if "--from" in sys.argv:
         i = sys.argv.index("--from")
         if i + 1 >= len(sys.argv) or not os.path.isdir(sys.argv[i + 1]):

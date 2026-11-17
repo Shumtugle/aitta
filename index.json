@@ -92,6 +92,28 @@
    "tier": "medium",
    "group": "gemma-e2b",
    "role": "vision"
+  },
+  {
+   "id": "llm-qwen",
+   "version": 1,
+   "kind": "llm",
+   "tag": "llm-qwen-1",
+   "file": "Qwen3-1.7B-UD-Q4_K_XL.gguf",
+   "bytes": 1132952128,
+   "sha256": "01977643b1d7292d09eb6ef75c7af8b084a3bbf2cb4e1d128ab76adeb8d75490",
+   "license": "Apache-2.0",
+   "unpack": "none",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/llm-qwen-1/Qwen3-1.7B-UD-Q4_K_XL.gguf"
+    },
+    {
+     "url": "https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-UD-Q4_K_XL.gguf"
+    }
+   ],
+   "tier": "light",
+   "group": "qwen-light",
+   "role": "model"
   }
  ]
 }
