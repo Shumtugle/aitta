@@ -17,6 +17,17 @@
    "repo": "HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive",
    "rev": "main",
    "path": "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf"
-  }
+  },
+  "bytes": 5812940768,
+  "sha256": "be18995dc554b6509254f38fd7d6f3193793091750072a57af47bca2525b1521"
+ },
+ "expect": {
+  "bytes": 5812940768,
+  "sha256": "be18995dc554b6509254f38fd7d6f3193793091750072a57af47bca2525b1521",
+  "parts": [
+   "1cb37d07c86b3f65c5f2ac4888d5492f20e6767b4060b8d0139d305222f7ab6d",
+   "8431f8dfc1e5da64107d4ce3d04db71023ce61d6fb03e8d054e4b5e94aecd756",
+   "db9448082ac7c6041e2b120034b728e22473c59c34d51523004f18bcc6172982"
+  ]
  }
 }

@@ -17,6 +17,12 @@
    "repo": "HauhauCS/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive",
    "rev": "main",
    "path": "mmproj-Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-f16.gguf"
-  }
+  },
+  "bytes": 990288832,
+  "sha256": "debad39ab9c1152ab67695a674fb35e8375b2320c57bfd5075835d3ccb16c7db"
+ },
+ "expect": {
+  "bytes": 990288832,
+  "sha256": "debad39ab9c1152ab67695a674fb35e8375b2320c57bfd5075835d3ccb16c7db"
  }
 }
