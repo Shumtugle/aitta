@@ -17,6 +17,81 @@
      "url": "https://github.com/Shumtugle/aitta/releases/download/hear-ru-1/hear-ru-1.zip"
     }
    ]
+  },
+  {
+   "id": "llm-e2b",
+   "version": 1,
+   "kind": "llm",
+   "tag": "llm-e2b-1",
+   "file": "gemma-4-E2B-it-Q4_K_M.gguf",
+   "bytes": 3106738272,
+   "sha256": "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8",
+   "license": "Apache-2.0",
+   "unpack": "none",
+   "sources": [
+    {
+     "parts": [
+      {
+       "url": "https://github.com/Shumtugle/aitta/releases/download/llm-e2b-1/gemma-4-E2B-it-Q4_K_M.gguf.part1",
+       "sha256": "7da501cf6c12f969f30588a4abbadd8fd8fecbc332b8f628752dc45dbed19dfe"
+      },
+      {
+       "url": "https://github.com/Shumtugle/aitta/releases/download/llm-e2b-1/gemma-4-E2B-it-Q4_K_M.gguf.part2",
+       "sha256": "e6dc74b1448b658752b3aec625169e07c8705788e19b427ab6d0d9565b6ca9fa"
+      }
+     ]
+    },
+    {
+     "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/0314792d7f1f7e229411f620751375812bb9faf2/gemma-4-E2B-it-Q4_K_M.gguf"
+    }
+   ],
+   "tier": "medium",
+   "group": "gemma-e2b",
+   "role": "model"
+  },
+  {
+   "id": "llm-e2b-draft",
+   "version": 1,
+   "kind": "llm",
+   "tag": "llm-e2b-draft-1",
+   "file": "mtp-gemma-4-E2B-it.gguf",
+   "bytes": 97817664,
+   "sha256": "9eba819938efccfd6044f8af84e3bbfddc639a2bcf32ebc36420e6a649191919",
+   "license": "Apache-2.0",
+   "unpack": "none",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/llm-e2b-draft-1/mtp-gemma-4-E2B-it.gguf"
+    },
+    {
+     "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/0314792d7f1f7e229411f620751375812bb9faf2/mtp-gemma-4-E2B-it.gguf"
+    }
+   ],
+   "tier": "medium",
+   "group": "gemma-e2b",
+   "role": "draft"
+  },
+  {
+   "id": "llm-e2b-vision",
+   "version": 1,
+   "kind": "llm",
+   "tag": "llm-e2b-vision-1",
+   "file": "mmproj-F16.gguf",
+   "bytes": 985654080,
+   "sha256": "140be8d7849741f88c50757d529b84373ee8e27052cc2236855b537f4a8215fa",
+   "license": "Apache-2.0",
+   "unpack": "none",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/llm-e2b-vision-1/mmproj-F16.gguf"
+    },
+    {
+     "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/0314792d7f1f7e229411f620751375812bb9faf2/mmproj-F16.gguf"
+    }
+   ],
+   "tier": "medium",
+   "group": "gemma-e2b",
+   "role": "vision"
   }
  ]
 }

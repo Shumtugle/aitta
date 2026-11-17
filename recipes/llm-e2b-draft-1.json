@@ -1,0 +1,18 @@
+{
+ "name": "llm-e2b-draft-1",
+ "id": "llm-e2b-draft",
+ "version": 1,
+ "kind": "llm",
+ "tier": "medium",
+ "group": "gemma-e2b",
+ "role": "draft",
+ "about": "Small draft model for Gemma 4 E2B (multi-token prediction), GGUF. Optional.",
+ "license": "Apache-2.0",
+ "pack": "none",
+ "file": "mtp-gemma-4-E2B-it.gguf",
+ "origin": {
+  "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/0314792d7f1f7e229411f620751375812bb9faf2/mtp-gemma-4-E2B-it.gguf",
+  "bytes": 97817664,
+  "sha256": "9eba819938efccfd6044f8af84e3bbfddc639a2bcf32ebc36420e6a649191919"
+ }
+}

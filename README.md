@@ -17,9 +17,15 @@ came (a model file) also names its origin as a second source.
 | tag | what | licence |
 |---|---|---|
 | `hear-ru-1` | small streaming speech recognizer for Russian | Apache-2.0 |
+| `llm-e2b-1` | Gemma 4 E2B instruct, Q4_K_M (two parts) | Apache-2.0 |
+| `llm-e2b-vision-1` | image projector for Gemma 4 E2B, F16 | Apache-2.0 |
+| `llm-e2b-draft-1` | draft model for Gemma 4 E2B, optional | Apache-2.0 |
+| `llm-qwen-1` | Qwen3 1.7B, UD-Q4_K_XL | Apache-2.0 |
 
-Origins, authors and changes are in each piece's `NOTICE.txt` and in
-`recipes/`.
+Origins, authors and changes are in `recipes/` and, for packed pieces, in
+each piece's `NOTICE.txt`. Model files are kept exactly as their authors
+published them; `tier` in `index.json` (light, medium, heavy) says how much
+phone a model wants, and `group` ties a model to its vision and draft files.
 
 ## Building
 

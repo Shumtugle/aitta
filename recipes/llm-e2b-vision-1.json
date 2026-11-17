@@ -1,0 +1,18 @@
+{
+ "name": "llm-e2b-vision-1",
+ "id": "llm-e2b-vision",
+ "version": 1,
+ "kind": "llm",
+ "tier": "medium",
+ "group": "gemma-e2b",
+ "role": "vision",
+ "about": "Image projector for Gemma 4 E2B, 16-bit GGUF.",
+ "license": "Apache-2.0",
+ "pack": "none",
+ "file": "mmproj-F16.gguf",
+ "origin": {
+  "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/0314792d7f1f7e229411f620751375812bb9faf2/mmproj-F16.gguf",
+  "bytes": 985654080,
+  "sha256": "140be8d7849741f88c50757d529b84373ee8e27052cc2236855b537f4a8215fa"
+ }
+}

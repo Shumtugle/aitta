@@ -18,6 +18,9 @@ in order, the parts are the very file the sum names.
     python3 tools/stock.py check NAME         download what is published, check every sum
     python3 tools/stock.py index              write index.json from the recipes
 
+build and upload take --from DIR: an origin file already on this machine, under
+its own name in DIR, is used instead of downloading it, once its sum agrees.
+
 Needs Python 3 only; upload also needs the gh tool, logged in. Work files go
 to ./work (several GB for a large model)."""
 import hashlib, json, os, subprocess, sys, tarfile, urllib.request, zipfile
@@ -29,6 +32,7 @@ INDEX = os.path.join(ROOT, "index.json")
 # Every release file must stay under 2 GiB; STOCK_PART_MB makes parts smaller for a dry test.
 PART = int(os.environ.get("STOCK_PART_MB", "1900")) * 1024 * 1024
 STAMP = (1980, 1, 1, 0, 0, 0)
+LOCAL = None
 
 
 def say(*words):
@@ -88,17 +92,40 @@ def fetch(url, path, size=0):
     print()
 
 
+def published(o):
+    """Size and sum of a file as its model host states them, for an origin the recipe names no sum for."""
+    h = o["host"]
+    url = "https://huggingface.co/api/models/%s/tree/%s" % (h["repo"], h["rev"])
+    with urllib.request.urlopen(url) as r:
+        for f in json.load(r):
+            if f.get("path") == h["path"] and f.get("lfs"):
+                return f["lfs"]["size"], f["lfs"]["oid"]
+    fail("the host does not list " + h["path"])
+
+
 def origin(r):
-    """The origin file in ./work, fetched if missing, refused if its sum is wrong."""
+    """The origin file in ./work: taken from --from, else fetched; refused if its sum is wrong."""
     o = r["origin"]
+    size, want = o.get("bytes"), o.get("sha256")
+    if not want:
+        size, want = published(o)
+        say("the host states", size, "bytes", want)
     # A piece kept as it came (a model file) is the origin itself, under its own name.
     path = os.path.join(WORK, r["file"] if r.get("pack") == "none" else r["name"] + ".origin")
-    if not (os.path.exists(path) and os.path.getsize(path) == o["bytes"]):
+    mine = os.path.join(LOCAL, os.path.basename(o["url"])) if LOCAL else None
+    if not os.path.exists(path) and mine and os.path.exists(mine) and os.path.getsize(mine) == size:
+        say("using", mine)
+        try:
+            os.link(mine, path)
+        except OSError:
+            import shutil
+            shutil.copyfile(mine, path)
+    if not (os.path.exists(path) and os.path.getsize(path) == size):
         say("fetching", o["url"])
-        fetch(o["url"], path, o["bytes"])
-    if sha256(path) != o["sha256"]:
+        fetch(o["url"], path, size)
+    if sha256(path) != want:
         os.remove(path)
-        fail("the origin of %s is not what the recipe names (removed; run again)" % r["name"])
+        fail("the origin of %s is not what its host or recipe names (removed; run again)" % r["name"])
     return path
 
 
@@ -197,6 +224,9 @@ def upload(name):
             continue
         say("uploading", base)
         gh("release", "upload", name, p, "--repo", where, "--clobber")
+    for p in files:
+        if p != piece:
+            os.remove(p)
     say("published", name)
 
 
@@ -232,6 +262,8 @@ def index():
     for n in names():
         r = recipe(n)
         want = r.get("expect")
+        if not want and r.get("pack") == "none" and r["origin"].get("sha256") and r["origin"]["bytes"] < PART:
+            want = {"bytes": r["origin"]["bytes"], "sha256": r["origin"]["sha256"]}
         if not want:
             say("skipped (no expected sum yet):", n)
             continue
@@ -245,7 +277,7 @@ def index():
              "bytes": want["bytes"], "sha256": want["sha256"], "license": r["license"],
              "unpack": "none" if r.get("pack") == "none" else "zip",
              "sources": [here]}
-        for k in ("tier", "needs"):
+        for k in ("tier", "needs", "group", "role"):
             if k in r:
                 e[k] = r[k]
         if r.get("pack") == "none" and r["origin"].get("url"):
@@ -258,6 +290,13 @@ def index():
 
 
 def main():
+    global LOCAL
+    if "--from" in sys.argv:
+        i = sys.argv.index("--from")
+        if i + 1 >= len(sys.argv) or not os.path.isdir(sys.argv[i + 1]):
+            fail("--from needs a folder")
+        LOCAL = os.path.abspath(sys.argv[i + 1])
+        del sys.argv[i:i + 2]
     if len(sys.argv) < 2 or sys.argv[1] not in ("list", "build", "upload", "check", "index"):
         print(__doc__)
         sys.exit(2)

@@ -1,0 +1,21 @@
+{
+ "name": "llm-qwen-1",
+ "id": "llm-qwen",
+ "version": 1,
+ "kind": "llm",
+ "tier": "light",
+ "group": "qwen-light",
+ "role": "model",
+ "about": "Qwen3 1.7B, 4-bit dynamic (UD-Q4_K_XL) GGUF.",
+ "license": "Apache-2.0",
+ "pack": "none",
+ "file": "Qwen3-1.7B-UD-Q4_K_XL.gguf",
+ "origin": {
+  "url": "https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-UD-Q4_K_XL.gguf",
+  "host": {
+   "repo": "unsloth/Qwen3-1.7B-GGUF",
+   "rev": "main",
+   "path": "Qwen3-1.7B-UD-Q4_K_XL.gguf"
+  }
+ }
+}
