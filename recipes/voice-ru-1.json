@@ -7,9 +7,36 @@
  "license": "CC-BY-4.0",
  "file": "voice-ru-1.zip",
  "origin": {
-  "url": "https://github.com/Shumtugle/hora/releases/download/packs/hora-voice-ru-1.zip",
-  "bytes": 102630314,
-  "sha256": "c984d5d9393cbf859c5da26a0409bb7dd2137c20f393d632500386fb28c4124d"
+  "files": {
+   "lm_main.onnx": {
+    "bytes": 75867622,
+    "sha256": "f478d6bf149193fd7b07ef05e62e3e84e628382cbf712de942fe36f66be68d79"
+   },
+   "lm_flow.onnx": {
+    "bytes": 9935594,
+    "sha256": "3949060bba0de673298a51364ae7588854ad732fe1d5a53af4bbc262204b6985"
+   },
+   "text_conditioner.onnx": {
+    "bytes": 16388309,
+    "sha256": "349d7f9038547e43105688653ae74075be4928777bca81793899ecb1c46d4d87"
+   },
+   "encoder.onnx": {
+    "bytes": 39283559,
+    "sha256": "1719ce00f8f659559b092000dc3c8365e6094b0ca017584c5c8145a2c3b43056"
+   },
+   "decoder.onnx": {
+    "bytes": 22618058,
+    "sha256": "7dfa397fb9f1905f97e2e77d2643ab9ab376898ca662bac2d9690caa250da813"
+   },
+   "vocab.json": {
+    "bytes": 87637,
+    "sha256": "09be493af8a545d4f2a4bee21d67897b9adf822907aef18001437d116720398e"
+   },
+   "token_scores.json": {
+    "bytes": 99625,
+    "sha256": "79d27c2b06369cbff0ff0ee3b8ae338b98d64fd50b32cd6f611a4a88f05ea93e"
+   }
+  }
  },
  "take": [
   "lm_main.onnx",
@@ -26,5 +53,6 @@
  "expect": {
   "bytes": 164282020,
   "sha256": "102bc32fdf5f83d135cca947587bfd97c3d7c2b9b50435eff3ebfe63d54906d0"
- }
+ },
+ "note": "The ONNX files are an export of the model named in NOTICE.txt, made for on-device use; no public place holds them but this release, which is their master public copy. A rebuild takes them from a local folder (--from)."
 }
