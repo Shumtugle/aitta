@@ -1,0 +1,12 @@
+Small streaming speech recognizer for Russian (int8 zipformer transducer).
+
+Model: vosk-model-small-streaming-ru by Alpha Cephei,
+https://huggingface.co/alphacep/vosk-model-small-streaming-ru
+converted for sherpa-onnx by the Next-gen Kaldi team (k2-fsa) and published as
+sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16.tar.bz2 in
+https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models
+Licence: Apache License 2.0 (LICENSE-apache-2.0.txt in this archive).
+
+Taken unchanged: encoder.int8.onnx, decoder.onnx, joiner.int8.onnx, tokens.txt.
+Added: bpe.vocab, made from the archive's bpe.model (one word piece and its
+score per line), so a recognizer can be told which words to expect.

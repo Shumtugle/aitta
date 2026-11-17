@@ -1,0 +1,32 @@
+{
+ "name": "hear-ru-1",
+ "id": "hear-ru",
+ "version": 1,
+ "kind": "hear",
+ "about": "Small streaming speech recognizer for Russian.",
+ "license": "Apache-2.0",
+ "file": "hear-ru-1.zip",
+ "origin": {
+  "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16.tar.bz2",
+  "bytes": 24110855,
+  "sha256": "6ba68a01ff3c5445aaf2d61e9b97b026f1149dcc9049d11af3f44f55176341d8",
+  "root": "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16"
+ },
+ "take": [
+  "encoder.int8.onnx",
+  "decoder.onnx",
+  "joiner.int8.onnx",
+  "tokens.txt"
+ ],
+ "add": [
+  "bpe.vocab",
+  "NOTICE.txt"
+ ],
+ "licenses": [
+  "apache-2.0.txt"
+ ],
+ "expect": {
+  "bytes": 28599666,
+  "sha256": "2bc86611332035cd4bf617414a341eda18fbafc338aeceae7741adf919279798"
+ }
+}

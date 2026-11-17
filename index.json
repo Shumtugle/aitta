@@ -1,0 +1,22 @@
+{
+ "format": 1,
+ "repo": "Shumtugle/aitta",
+ "modules": [
+  {
+   "id": "hear-ru",
+   "version": 1,
+   "kind": "hear",
+   "tag": "hear-ru-1",
+   "file": "hear-ru-1.zip",
+   "bytes": 28599666,
+   "sha256": "2bc86611332035cd4bf617414a341eda18fbafc338aeceae7741adf919279798",
+   "license": "Apache-2.0",
+   "unpack": "zip",
+   "sources": [
+    {
+     "url": "https://github.com/Shumtugle/aitta/releases/download/hear-ru-1/hear-ru-1.zip"
+    }
+   ]
+  }
+ ]
+}
