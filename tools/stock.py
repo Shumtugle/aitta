@@ -24,7 +24,7 @@ its own name in DIR, is used instead of downloading it, once its sum agrees.
 
 Needs Python 3 only; upload also needs the gh tool, logged in. Work files go
 to ./work (several GB for a large model)."""
-import hashlib, json, os, subprocess, sys, tarfile, urllib.request, zipfile
+import hashlib, json, os, subprocess, sys, tarfile, time, urllib.request, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RECIPES = os.path.join(ROOT, "recipes")
@@ -226,8 +226,15 @@ def upload(name):
         if have.get(base) == os.path.getsize(p):
             say("already there:", base)
             continue
-        say("uploading", base)
-        gh("release", "upload", name, p, "--repo", where, "--clobber")
+        for attempt in (1, 2, 3, 4):
+            say("uploading", base, "(try %d)" % attempt if attempt > 1 else "")
+            got = gh("release", "upload", name, p, "--repo", where, "--clobber", quiet=True)
+            if got.returncode == 0:
+                break
+            say("  the upload broke off:", got.stderr.strip().splitlines()[-1] if got.stderr.strip() else "")
+            if attempt == 4:
+                fail("could not upload %s; run the same command again later" % base)
+            time.sleep(30 * attempt)
     for p in files:
         if p != piece:
             os.remove(p)
