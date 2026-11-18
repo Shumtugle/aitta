@@ -19,6 +19,8 @@ came (a model file) also names its origin as a second source.
 | `hear-ru-1` | small streaming speech recognizer for Russian | Apache-2.0 |
 | `voice-ru-1` | speech model for Russian (text to speech) | CC-BY-4.0 |
 | `stress-ru-1` | large Russian stress list | CC-BY-SA-4.0, Apache-2.0, MIT |
+| `lang-ru-1` | Russian reading lists: yo, stress, words spelled alike, stress network (on the shelf) | CC-BY-SA-4.0, Apache-2.0, MIT |
+| `voice-en-1` | speech model for English, beside `voice-ru-1`'s encoder and decoder (on the shelf, three parts) | CC-BY-4.0 |
 | `llm-e2b-1` | Gemma 4 E2B instruct, Q4_K_M (two parts) | Apache-2.0 |
 | `llm-e2b-vision-1` | image projector for Gemma 4 E2B, F16 | Apache-2.0 |
 | `llm-e2b-draft-1` | draft model for Gemma 4 E2B, optional | Apache-2.0 |
@@ -45,8 +47,15 @@ python3 tools/stock.py list
 python3 tools/stock.py build hear-ru-1     # build and check, nothing leaves the machine
 python3 tools/stock.py upload hear-ru-1    # also publish what the release lacks (gh, logged in)
 python3 tools/stock.py check hear-ru-1     # download what is published and check every sum
+python3 tools/stock.py shelve lang-ru-1    # build, check, lay it on the shelf (shelf/, into git)
 python3 tools/stock.py index               # write index.json from the recipes
 ```
+
+The shelf is the second way in: a piece kept in this repository itself,
+under `shelf/<tag>/`, cut into parts below git's file limit, with their sums
+in `SUMS.txt`. The index names the shelf first and the release after it, so
+a phone finds the piece either way. A shelved piece can still be published
+as a release later with `upload`; nothing else changes.
 
 Python 3 only; uploading also needs the `gh` tool. Work files go to `./work`.
 

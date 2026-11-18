@@ -1,0 +1,52 @@
+{
+ "name": "voice-en-1",
+ "id": "voice-en",
+ "version": 1,
+ "kind": "voice",
+ "about": "Speech model for English (text to speech), ONNX; uses the Russian voice's encoder and decoder.",
+ "license": "CC-BY-4.0",
+ "file": "voice-en-1.zip",
+ "origin": {
+  "files": {
+   "lm_main.onnx": {
+    "bytes": 75868616,
+    "sha256": "bf6b438fea3af7d8af7e0bfa67b071e8bce2f2d9d8627c1210e7b568a6691065"
+   },
+   "lm_flow.onnx": {
+    "bytes": 9935594,
+    "sha256": "a86f58284d7885f325ebb238d40782be9716dc1e1149dc2469f113dac9f033f5"
+   },
+   "text_conditioner.onnx": {
+    "bytes": 16388310,
+    "sha256": "6d66994acc358324667e22c56358125acd3e6d219f013e110dbc7b542595c3a2"
+   },
+   "vocab.json": {
+    "bytes": 61476,
+    "sha256": "4350f94081193af0e8660a2040e970fb74f479d3de0a23692535019d55e0323d"
+   },
+   "token_scores.json": {
+    "bytes": 115614,
+    "sha256": "a4bc67c64ba059f3f703d23b571b9baa325aed8e287852fbbbb998d443f6e6c6"
+   },
+   "pack.json": {
+    "bytes": 66,
+    "sha256": "a8ab8e5e5ea216de23bfa867f45771f7e370a007126332b3a223687d0a705969"
+   }
+  }
+ },
+ "take": [
+  "lm_main.onnx",
+  "lm_flow.onnx",
+  "text_conditioner.onnx",
+  "vocab.json",
+  "token_scores.json",
+  "pack.json"
+ ],
+ "add": [
+  "NOTICE.txt"
+ ],
+ "expect": {
+  "bytes": 102371179,
+  "sha256": "e853a6d05d69df7c4c1a7d9636b993602da6ff6e500025b6d9a743bb087721d8"
+ }
+}

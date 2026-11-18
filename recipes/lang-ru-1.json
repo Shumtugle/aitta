@@ -1,0 +1,52 @@
+{
+ "name": "lang-ru-1",
+ "id": "lang-ru",
+ "version": 1,
+ "kind": "lang",
+ "about": "Russian language lists: yo, stress, words spelled alike, stress network.",
+ "license": "CC-BY-SA-4.0, Apache-2.0, MIT",
+ "file": "lang-ru-1.zip",
+ "origin": {
+  "files": {
+   "yo.txt.gz": {
+    "bytes": 665516,
+    "sha256": "d43c95030fd4b1d67f141ecab137819cb986da25a5d8b7959a4640d581c50cde"
+   },
+   "stress.txt.gz": {
+    "bytes": 1446306,
+    "sha256": "90ecab7ab7510cbcbdcd53ddcce5fe518b6fe0d3fc908a71e258c435e52be247"
+   },
+   "homographs.tsv.gz": {
+    "bytes": 235052,
+    "sha256": "e4d340fb255bb56a27b565b23bbadce03af2be04a89e3c91cfbd698dcd8ad006"
+   },
+   "stress-net.bin": {
+    "bytes": 2149672,
+    "sha256": "3f7dee7ec2ddac854a32c8bcbedcccace7744c9203ef6c927810c3a52d907b07"
+   },
+   "stress-net-vocab.txt": {
+    "bytes": 140,
+    "sha256": "242882b2f27800e49a6babf46867dabf6dc9b6535b600776a68815fe4d4f4382"
+   },
+   "stress-yo-maybe.txt": {
+    "bytes": 16148,
+    "sha256": "21071e6d9102d543aeca3e39566e5a715b55d550e94acbd1af6b184ad3152212"
+   }
+  }
+ },
+ "take": [
+  "yo.txt.gz",
+  "stress.txt.gz",
+  "homographs.tsv.gz",
+  "stress-net.bin",
+  "stress-net-vocab.txt",
+  "stress-yo-maybe.txt"
+ ],
+ "add": [
+  "NOTICE.txt"
+ ],
+ "expect": {
+  "bytes": 4518995,
+  "sha256": "d78602a34866d5f7a28b85d5c8f536b8f98d54b0fe20fd7243373d7f57f854db"
+ }
+}

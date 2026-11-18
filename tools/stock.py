@@ -16,11 +16,18 @@ in order, the parts are the very file the sum names.
     python3 tools/stock.py build NAME         fetch the origin, build, check (nothing leaves)
     python3 tools/stock.py upload NAME        build, check, publish what the release lacks
     python3 tools/stock.py check NAME         download what is published, check every sum
+    python3 tools/stock.py shelve NAME        build, check, put the piece on the shelf (into git)
     python3 tools/stock.py index              write index.json from the recipes
 
 upload takes --to OWNER/REPO to publish somewhere other than this storehouse
 (a private copy of a piece the index only links to). build and upload take --from DIR: an origin file already on this machine, under
 its own name in DIR, is used instead of downloading it, once its sum agrees.
+
+A piece can also lie on the shelf: in this repository itself, under
+shelf/NAME/, cut into parts small enough for git. The index then names the
+shelf first and the release after it, so a phone finds the piece either way;
+the shelf is the way in when releases cannot be made from where the piece is
+built.
 
 Needs Python 3 only; upload also needs the gh tool, logged in. Work files go
 to ./work (several GB for a large model)."""
@@ -290,6 +297,53 @@ def check(name):
     say("check ok:", name)
 
 
+SHELF = os.path.join(ROOT, "shelf")
+# Git refuses files of 100 MB and more; parts stay well below that.
+SHELF_PART = 45 * 1024 * 1024
+
+
+def shelf_parts(name):
+    """The piece's files on the shelf, in order, or an empty list when it is not shelved."""
+    d = os.path.join(SHELF, name)
+    if not os.path.isdir(d):
+        return []
+    return sorted((n for n in os.listdir(d) if not n.endswith(".txt")),
+                  key=lambda n: int(n.rsplit("part", 1)[1]) if ".part" in n else 0)
+
+
+def shelve(name):
+    """Builds the piece and lays it on the shelf, whole or in parts, with a list of their sums."""
+    r, path, _ = build(name)
+    d = os.path.join(SHELF, name)
+    if os.path.isdir(d):
+        for n in os.listdir(d):
+            os.remove(os.path.join(d, n))
+    os.makedirs(d, exist_ok=True)
+    sums = []
+    with open(path, "rb") as f:
+        size = os.path.getsize(path)
+        if size < SHELF_PART:
+            out = os.path.join(d, r["file"])
+            with open(out, "wb") as o:
+                o.write(f.read())
+            sums.append((r["file"], sha256(out)))
+        else:
+            k = 1
+            while True:
+                block = f.read(SHELF_PART)
+                if not block:
+                    break
+                n = "%s.part%d" % (r["file"], k)
+                with open(os.path.join(d, n), "wb") as o:
+                    o.write(block)
+                sums.append((n, sha256(os.path.join(d, n))))
+                k += 1
+    with open(os.path.join(d, "SUMS.txt"), "w", encoding="utf-8") as f:
+        for n, s in sums:
+            f.write("%s  %s\n" % (s, n))
+    say("shelved", name, "in", len(sums), "file(s)")
+
+
 def index():
     """index.json from the recipes: what a phone may fetch, and from where."""
     where = repo()
@@ -314,6 +368,14 @@ def index():
              "bytes": want["bytes"], "sha256": want["sha256"], "license": r["license"],
              "unpack": "none" if r.get("pack") == "none" else "zip",
              "sources": [here]}
+        shelved = shelf_parts(n)
+        if shelved:
+            raw = "https://raw.githubusercontent.com/%s/main/shelf/%s/" % (where, n)
+            if len(shelved) == 1:
+                first = {"url": raw + shelved[0]}
+            else:
+                first = {"parts": [{"url": raw + p, "sha256": sha256(os.path.join(SHELF, n, p))} for p in shelved]}
+            e["sources"].insert(0, first)
         for k in ("tier", "needs", "group", "role"):
             if k in r:
                 e[k] = r[k]
@@ -340,7 +402,7 @@ def main():
             fail("--from needs a folder")
         LOCAL = os.path.abspath(sys.argv[i + 1])
         del sys.argv[i:i + 2]
-    if len(sys.argv) < 2 or sys.argv[1] not in ("list", "build", "upload", "check", "index"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("list", "build", "upload", "check", "shelve", "index"):
         print(__doc__)
         sys.exit(2)
     cmd = sys.argv[1]
@@ -354,7 +416,7 @@ def main():
         return
     if len(sys.argv) != 3:
         fail("say which piece, e.g.: python3 tools/stock.py %s hear-ru-1" % cmd)
-    {"build": build, "upload": upload, "check": check}[cmd](sys.argv[2])
+    {"build": build, "upload": upload, "check": check, "shelve": shelve}[cmd](sys.argv[2])
 
 
 if __name__ == "__main__":
